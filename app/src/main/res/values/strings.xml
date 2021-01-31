@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Drinks</string>
+    <string name="drink_image">Drink image</string>
+    <string name="weblink">https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=</string>
+</resources>
