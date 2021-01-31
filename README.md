@@ -9,3 +9,5 @@ In the repository i made two get volley request simultaneously, and then combine
 The Application utilizes libraries such as: Glide and Volley
 
 # Screenshot
+
+![}(Screenshot/device-2021-01-31-153931.png)
