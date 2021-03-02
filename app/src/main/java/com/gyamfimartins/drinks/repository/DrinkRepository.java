@@ -3,29 +3,34 @@ package com.gyamfimartins.drinks.repository;
 import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.gson.Gson;
 import com.gyamfimartins.drinks.R;
 import com.gyamfimartins.drinks.model.Drink;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 public class DrinkRepository {
 
-    public DrinkRepository(){
+    public DrinkRepository() {
 
     }
 
     public LiveData<ArrayList<Drink>> getAllDrinks(final Context context) {
-       final MutableLiveData<ArrayList<Drink>> data = new MutableLiveData<>();
-       final ArrayList<Drink> drinkList = new ArrayList<>();
+        final MutableLiveData<ArrayList<Drink>> data = new MutableLiveData<>();
+        final ArrayList<Drink> drinkList = new ArrayList<>();
 
         String AlcoholicUrl = context.getString(R.string.weblink) + "Alcoholic";
         String NonalcoholicUrl = context.getString(R.string.weblink) + "Non_Alcoholic";
@@ -36,27 +41,21 @@ public class DrinkRepository {
                     Log.d("Alcoholic drinks", ">>" + response);
 
                     try {
-
+                        Gson gson = new Gson();
                         JSONObject obj = new JSONObject(response);
-                        JSONArray dataArray  = obj.getJSONArray("drinks");
+                        JSONArray dataArray = obj.getJSONArray("drinks");
 
                         for (int i = 0; i < dataArray.length(); i++) {
-
-                            Drink drink = new Drink();
                             JSONObject dataobj = dataArray.getJSONObject(i);
-
-                            drink.setStrDrink(dataobj.getString("strDrink"));
-                            drink.setStrDrinkThumb(dataobj.getString("strDrinkThumb"));
-                            drink.setType("Alcoholic");
-
+                            Drink drink = gson.fromJson(String.valueOf(dataobj), Drink.class);
                             drinkList.add(drink);
                         }
-                      //  data.setValue(drinkList);
+
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
                 },
-                error -> Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show()){
+                error -> Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show()) {
 
         };
 
@@ -66,19 +65,13 @@ public class DrinkRepository {
                     Log.d("Non-acoholic drinks", ">>" + response);
 
                     try {
-
+                        Gson gson = new Gson();
                         JSONObject obj = new JSONObject(response);
-                        JSONArray dataArray  = obj.getJSONArray("drinks");
+                        JSONArray dataArray = obj.getJSONArray("drinks");
 
                         for (int i = 0; i < dataArray.length(); i++) {
-
-                            Drink drink = new Drink();
                             JSONObject dataobj = dataArray.getJSONObject(i);
-
-                            drink.setStrDrink(dataobj.getString("strDrink"));
-                            drink.setStrDrinkThumb(dataobj.getString("strDrinkThumb"));
-                            drink.setType("Nonalcoholic");
-
+                            Drink drink = gson.fromJson(String.valueOf(dataobj), Drink.class);
                             drinkList.add(drink);
                         }
                         data.setValue(drinkList);
@@ -86,7 +79,7 @@ public class DrinkRepository {
                         e.printStackTrace();
                     }
                 },
-                error -> Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show()){
+                error -> Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show()) {
 
         };
 
@@ -104,8 +97,5 @@ public class DrinkRepository {
         requestQueue.add(nonalcoholRequest);
         return data;
     }
-
-
-
 
 }

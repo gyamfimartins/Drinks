@@ -18,14 +18,14 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
     private DrinkViewModel drinkViewModel;
     private RecyclerView rvdrinks;
-  private DrinkAdapter drinkAdapter;
+    private DrinkAdapter drinkAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-         rvdrinks = findViewById(R.id.rvdrinks);
+        rvdrinks = findViewById(R.id.rvdrinks);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -39,12 +39,12 @@ public class MainActivity extends AppCompatActivity {
         getAllDrinks();
     }
 
-    public void getAllDrinks(){
-           drinkViewModel.getAllDrinks().observe(this, drinks -> {
-             drinkAdapter.setDrinks(drinks, MainActivity.this);
-               rvdrinks.setAdapter(drinkAdapter);
+    public void getAllDrinks() {
+        drinkViewModel.getAllDrinks().observe(this, drinks -> {
+            drinkAdapter.setDrinks(drinks, MainActivity.this);
+            rvdrinks.setAdapter(drinkAdapter);
 
-           });
+        });
 
     }
 }

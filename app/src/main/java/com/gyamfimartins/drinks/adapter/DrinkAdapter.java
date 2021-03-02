@@ -16,7 +16,7 @@ import com.gyamfimartins.drinks.model.Drink;
 
 import java.util.ArrayList;
 
-public class DrinkAdapter extends RecyclerView.Adapter<DrinkAdapter.DrinkHolder>{
+public class DrinkAdapter extends RecyclerView.Adapter<DrinkAdapter.DrinkHolder> {
     private ArrayList<Drink> drinkList = new ArrayList<>();
     private Context context;
 
@@ -24,7 +24,7 @@ public class DrinkAdapter extends RecyclerView.Adapter<DrinkAdapter.DrinkHolder>
     @Override
     public DrinkHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.single_item,parent,false);
+                .inflate(R.layout.single_item, parent, false);
         return new DrinkHolder(itemView);
     }
 
@@ -45,13 +45,13 @@ public class DrinkAdapter extends RecyclerView.Adapter<DrinkAdapter.DrinkHolder>
         return drinkList.size();
     }
 
-    public void setDrinks(ArrayList<Drink> drinkList, Context context){
-          this.drinkList = drinkList;
-          this.context =context;
-          notifyDataSetChanged();
+    public void setDrinks(ArrayList<Drink> drinkList, Context context) {
+        this.drinkList = drinkList;
+        this.context = context;
+        notifyDataSetChanged();
     }
 
-    class DrinkHolder extends RecyclerView.ViewHolder{
+    class DrinkHolder extends RecyclerView.ViewHolder {
         private ImageView imageView_strDrinkThumb;
         private TextView textView_name;
 
