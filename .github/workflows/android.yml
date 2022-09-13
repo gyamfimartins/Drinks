@@ -3,8 +3,8 @@ name: Android CI
 on:
    workflow_dispatch:
     inputs:
-      environment:
-        type: environment
+      branch:
+        description: 'Select branch to generate release'
         default: "master"
         required: true
 
